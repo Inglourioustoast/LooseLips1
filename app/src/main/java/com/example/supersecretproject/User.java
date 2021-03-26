@@ -7,6 +7,11 @@ public class User {
     public String age;
     public String superSecretPassword;
 
+
+
+    public String userStatus;
+
+
     public User() {
 
     }
@@ -16,8 +21,16 @@ public class User {
         this.age = age;
         this.email = email;
         this.superSecretPassword = superSecretPassword;
+
     }
 
 
+    public String getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus;
+    }
 
 }
