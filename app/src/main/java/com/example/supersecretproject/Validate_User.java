@@ -12,7 +12,6 @@ public class Validate_User {
             return false;
         } else if (firstName.contains("(?i)(^[a-z]+)[a-z .,-]((?! .,-)$){1,25}$")) {
             return false;
-
         } else {
             return true;
         }
