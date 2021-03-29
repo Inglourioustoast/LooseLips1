@@ -24,20 +24,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
-
-    EditText emailText;
-    EditText passwordText;
+    public String userStatus;
+    EditText emailText, passwordText;
     Button loginButton;
     TextView register;
     ProgressBar progressBar;
     TextView forgotPassword;
     int inCorrectPasswordCount;
     String userID;
-    public String userStatus;
-
     private FirebaseAuth mAuth;
     private DatabaseReference mDataBase;
-    private DatabaseReference mAuthUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +42,6 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
         mAuth = FirebaseAuth.getInstance();
         mDataBase = FirebaseDatabase.getInstance().getReference();
-
-
         emailText = (EditText) findViewById(R.id.editTextEmail);
         passwordText = (EditText) findViewById(R.id.editTextPassword);
         loginButton = (Button) findViewById(R.id.loginButton);
@@ -57,10 +51,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         loginButton.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
         register.setOnClickListener(this);
-
-
     }
-
 
     public void onClick(View v) {
         switch (v.getId()) {
@@ -86,73 +77,54 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 if (!Validate_User.validateEmail(email)) {
                     emailText.setError("Please enter a valid email");
                     emailText.requestFocus();
-                    return;
-
 
                 } else {
-
                     //login proccess, signs into firebase + pulls validation status
                     progressBar.setVisibility(View.VISIBLE);
-
-
-
                     mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             Toast.makeText(LoginScreen.this, "Sucesfully logged in", Toast.LENGTH_SHORT).show();
                             Log.d("debug", "user singed in");
-                           if(task.isSuccessful()) {
-                               userID = task.getResult().getUser().getUid();
-                               mDataBase.child("Users").child(userID).child("userStatus").addValueEventListener(new ValueEventListener() {
-                                   @Override
-                                   public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                       userStatus = snapshot.getValue().toString();
-                                       Log.d("info", "user status " + userStatus);
-                                   }
+                            if (task.isSuccessful()) {
+                                userID = task.getResult().getUser().getUid();
+                                mDataBase.child("Users").child(userID).child("userStatus").addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    //pulls current user status and switches the login page depending on their status.
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        userStatus = snapshot.getValue().toString();
+                                        Log.d("info", "user status " + userStatus);
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                    }});
+                                switch (userStatus) {
+                                    case "Awaiting Validation": {
+                                        startActivity(new Intent(LoginScreen.this, Awaiting_Validation.class));
+                                        finish();
+                                    }
+                                    case "Administrator": {
+                                        startActivity(new Intent(LoginScreen.this, Admin_screen.class));
+                                        finish();
+                                    }
+                                    case "Validated": {
+                                        startActivity(new Intent(LoginScreen.this, Profile_activity.class));
+                                        finish();
+                                    }
 
-                                   @Override
-                                   public void onCancelled(@NonNull DatabaseError error) {
-
-                                   }
-                               });
-                               switch (userStatus) {
-                                   case "Awaiting Validation": {
-                                       startActivity(new Intent(LoginScreen.this, Awaiting_Validation.class));
-                                       finish();
-                                   }
-
-                               case "Administrator": {
-                                   startActivity(new Intent(LoginScreen.this, Admin_screen.class));
-                                   finish();
-                               }
-
-                            case "Validated": {
-                                startActivity(new Intent(LoginScreen.this, Profile_activity.class));
-                                finish();
-                            }
-
- {
-     startActivity(new Intent(LoginScreen.this, Awaiting_Validation.class));
-
-                               Log.d("info", "userID logged in, User:" + userID + " User status: " + userStatus);
-
-
-                               finish();
-                           } else {
-                               Toast.makeText(LoginScreen.this, "User login Failed: "+ task.getException().getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                           }
-
-                            //pulls current user status and switches the login page depending on their status.
-                        }
+                                    {
 
 
 
-                    });
+                                }
 
-                }
-        }
 
-    }
-}
+                            };
+
+                        }}});}}}}
+
+
+
+
 

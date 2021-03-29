@@ -90,7 +90,7 @@ public class SuccessfulLoginAwaitingValidation {
         SystemClock.sleep(1500);
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.header2), withText("Awating Validation"), isDisplayed()));
+                allOf(withId(R.id.editTextProfileActivityTitle), withText("Awating Validation"), isDisplayed()));
         textView.check(matches(withText("Awating Validation")));
     }
 
