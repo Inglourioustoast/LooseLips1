@@ -122,8 +122,9 @@ public class RegisterAccount extends AppCompatActivity implements View.OnClickLi
                                 user.setUserStatus("Awaiting validation");
                                 Log.d("Account creation", "account created: fullname :" + fullName);
                                 FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>()
 
-                                        .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
 
@@ -132,7 +133,10 @@ public class RegisterAccount extends AppCompatActivity implements View.OnClickLi
                                             Toast.makeText(RegisterAccount.this, "User has been registered sucessfully", Toast.LENGTH_LONG).show();
                                             progressBar.setVisibility(View.INVISIBLE);
                                             startActivity(new Intent(RegisterAccount.this, Awaiting_Validation.class));
+
+
                                         } else {
+
                                             Toast.makeText(RegisterAccount.this, "User Registration Failed", Toast.LENGTH_LONG).show();
 
                                             progressBar.setVisibility(View.GONE);

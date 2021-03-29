@@ -2,6 +2,7 @@ package com.example.supersecretproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 public class Awaiting_Validation extends AppCompatActivity {
@@ -10,5 +11,6 @@ public class Awaiting_Validation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_awaiting__validation2);
+
     }
 }

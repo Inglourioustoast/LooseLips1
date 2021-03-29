@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,13 +32,21 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     ProgressBar progressBar;
     TextView forgotPassword;
     int inCorrectPasswordCount;
+    String userID;
+    public String userStatus;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mDataBase;
+    private DatabaseReference mAuthUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+
+        mAuth = FirebaseAuth.getInstance();
+        mDataBase = FirebaseDatabase.getInstance().getReference();
+
 
         emailText = (EditText) findViewById(R.id.editTextEmail);
         passwordText = (EditText) findViewById(R.id.editTextPassword);
@@ -77,15 +91,61 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
                 } else {
 
-                    //login proccess
+                    //login proccess, signs into firebase + pulls validation status
                     progressBar.setVisibility(View.VISIBLE);
-                    Toast.makeText(this, "Sucesfully logged in", Toast.LENGTH_SHORT).show();
+
+
+
                     mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            Toast.makeText(LoginScreen.this, "Sucesfully logged in", Toast.LENGTH_SHORT).show();
+                            Log.d("debug", "user singed in");
+                           if(task.isSuccessful()) {
+                               userID = task.getResult().getUser().getUid();
+                               mDataBase.child("Users").child(userID).child("userStatus").addValueEventListener(new ValueEventListener() {
+                                   @Override
+                                   public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                       userStatus = snapshot.getValue().toString();
+                                       Log.d("info", "user status " + userStatus);
+                                   }
+
+                                   @Override
+                                   public void onCancelled(@NonNull DatabaseError error) {
+
+                                   }
+                               });
+                               switch (userStatus) {
+                                   case "Awaiting Validation": {
+                                       startActivity(new Intent(LoginScreen.this, Awaiting_Validation.class));
+                                       finish();
+                                   }
+
+                               case "Administrator": {
+                                   startActivity(new Intent(LoginScreen.this, Admin_screen.class));
+                                   finish();
+                               }
+
+                            case "Validated": {
+                                startActivity(new Intent(LoginScreen.this, Profile_activity.class));
+                                finish();
+                            }
+
+ {
+     startActivity(new Intent(LoginScreen.this, Awaiting_Validation.class));
+
+                               Log.d("info", "userID logged in, User:" + userID + " User status: " + userStatus);
+
+
+                               finish();
+                           } else {
+                               Toast.makeText(LoginScreen.this, "User login Failed: "+ task.getException().getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                           }
 
                             //pulls current user status and switches the login page depending on their status.
                         }
+
 
 
                     });

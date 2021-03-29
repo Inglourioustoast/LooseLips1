@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFD27F
-"
+"   android:id="@+id/content"
     tools:context=".MainActivity">
 
 
     <TextView
-        android:id="@+id/TextView"
+        android:id="@+id/header2"
         android:layout_width="332dp"
         android:layout_height="131dp"
         android:layout_marginTop="132dp"

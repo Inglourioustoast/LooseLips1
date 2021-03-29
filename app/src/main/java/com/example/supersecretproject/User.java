@@ -6,9 +6,6 @@ public class User {
     public String email;
     public String age;
     public String superSecretPassword;
-
-
-
     public String userStatus;
 
 
