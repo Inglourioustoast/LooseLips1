@@ -24,6 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
+
+
+
     public String userStatus;
     EditText emailText, passwordText;
     Button loginButton;
@@ -32,8 +35,26 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     TextView forgotPassword;
     int inCorrectPasswordCount;
     String userID;
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+
     private FirebaseAuth mAuth;
     private DatabaseReference mDataBase;
+
+    public String getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +72,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         loginButton.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
         register.setOnClickListener(this);
+        setUserStatus("null1");
     }
 
     public void onClick(View v) {
@@ -83,23 +105,43 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                     progressBar.setVisibility(View.VISIBLE);
                     mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
-                        @Override
+
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            Toast.makeText(LoginScreen.this, "Sucesfully logged in", Toast.LENGTH_SHORT).show();
-                            Log.d("debug", "user singed in");
                             if (task.isSuccessful()) {
+                                Toast.makeText(LoginScreen.this, "Sucesfully logged in", Toast.LENGTH_SHORT).show();
+                                Log.d("debug", "user singed in");
+
+                                Log.d("debug", "about to grab user status");
                                 userID = task.getResult().getUser().getUid();
-                                mDataBase.child("Users").child(userID).child("userStatus").addValueEventListener(new ValueEventListener() {
+                                Log.d("debug", "user status is " + userID);
+                            } else {
+                                Log.d("login failed", "failed to log in");
+                            }
+                        }
+                    });
+
+                    Log.d("debug", "about to pull status for " + getUserID());
+                                mDataBase.child("Users").child(getUserID()).child("userStatus").addValueEventListener(new ValueEventListener() {
                                     @Override
                                     //pulls current user status and switches the login page depending on their status.
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         userStatus = snapshot.getValue().toString();
-                                        Log.d("info", "user status " + userStatus);
+                                        Log.d("debug", "user status " + userStatus);
                                     }
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError error) {
                                     }});
-                                switch (userStatus) {
+
+
+
+
+                        }
+
+
+
+                    };
+                    Log.d("info", "Starting switchcase");
+                          switch (userStatus) {
                                     case "Awaiting Validation": {
                                         startActivity(new Intent(LoginScreen.this, Awaiting_Validation.class));
                                         finish();
@@ -112,17 +154,24 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                                         startActivity(new Intent(LoginScreen.this, Profile_activity.class));
                                         finish();
                                     }
+                              case "null": {
+                                  Log.d("debug", "cant pull user status" );
+                              }
 
-                                    {
 
 
 
-                                }
+
+
 
 
                             };
 
-                        }}});}}}}
+
+
+
+
+                    ;}}
 
 
 
