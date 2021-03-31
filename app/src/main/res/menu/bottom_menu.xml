@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Secret Message"
+        android:id="@+id/dashBoardFragment"
+        android:icon="@drawable/privacy"/>
+    <item android:title="Users"
+        android:id="@+id/usersFragment"
+        android:icon="@drawable/people"/>
+    <item android:title="Settings"
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/settings"/>
+
+</menu>
