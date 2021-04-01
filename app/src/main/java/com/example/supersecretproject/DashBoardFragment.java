@@ -5,24 +5,30 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DashBoardFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DashBoardFragment extends Fragment implements View.OnClickListener {
+public class DashBoardFragment extends Fragment  {
 
 
 
@@ -78,6 +84,7 @@ public class DashBoardFragment extends Fragment implements View.OnClickListener 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
 
 
@@ -92,12 +99,14 @@ public class DashBoardFragment extends Fragment implements View.OnClickListener 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dash_board, container, false);
         EditText editTextMOTD = (EditText) view.findViewById(R.id.editTextMOTD);
+Button updateMOTDButton = (Button) view.findViewById(R.id.updateMOTDButton);
+
         mDataBase = FirebaseDatabase.getInstance().getReference();
         mDataBase.child("MOTD").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        editTextMOTD.setText(snapshot.getValue().toString());
+                        editTextMOTD.setText(Objects.requireNonNull(snapshot.getValue()).toString());
 
                     }
 
@@ -108,21 +117,43 @@ public class DashBoardFragment extends Fragment implements View.OnClickListener 
 
                 });
 
-        return view;
 
-    }
 
+
+
+updateMOTDButton.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.updateMOTDButton:
-
-
-
-
-
-        }
+      String MOTDupdate;
+      Log.d("debug", "MOTD is " + editTextMOTD.getText());
+     MOTDupdate = editTextMOTD.getText().toString();
+        mDataBase.child("MOTD").setValue(MOTDupdate).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(getActivity(), "MOTD updated successfully", Toast.LENGTH_LONG).show();
+                Log.d("info", "update MOTD button clicked");
     }
 
-}
+
+
+    }
+    );
+
+    }
+
+
+
+    });
+        return view;
+    }}
+
+
+
+
+
+
+
+
+
+
 

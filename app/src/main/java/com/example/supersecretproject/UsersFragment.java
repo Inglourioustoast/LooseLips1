@@ -3,10 +3,14 @@ package com.example.supersecretproject;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +23,10 @@ public class UsersFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -28,15 +36,8 @@ public class UsersFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UsersFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
+
     public static UsersFragment newInstance(String param1, String param2) {
         UsersFragment fragment = new UsersFragment();
         Bundle args = new Bundle();
@@ -49,16 +50,48 @@ public class UsersFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_users, container, false);
+        View view = inflater.inflate(R.layout.fragment_users, container, false);
+
+        ArrayList<ExampleItem> exampleList = new ArrayList<>();
+        exampleList.add(new ExampleItem(R.drawable.person, "Line 1", "Line 2"));
+        exampleList.add(new ExampleItem(R.drawable.person, "Line 3", "Line 4"));
+        exampleList.add(new ExampleItem(R.drawable.person, "Line 5", "Line 6"));
+        exampleList.add(new ExampleItem(R.drawable.person, "Line 1", "Line 2"));
+        exampleList.add(new ExampleItem(R.drawable.person, "Line 3", "Line 4"));
+        exampleList.add(new ExampleItem(R.drawable.person, "Line 5", "Line 6"));
+        exampleList.add(new ExampleItem(R.drawable.person, "Line 1", "Line 2"));
+        exampleList.add(new ExampleItem(R.drawable.person, "Line 3", "Line 4"));
+        exampleList.add(new ExampleItem(R.drawable.person, "Line 5", "Line 6"));
+        exampleList.add(new ExampleItem(R.drawable.person, "Line 1", "Line 2"));
+        exampleList.add(new ExampleItem(R.drawable.person, "Line 3", "Line 4"));
+        exampleList.add(new ExampleItem(R.drawable.person, "Line 5", "Line 6"));
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this.getActivity());
+        mAdapter = new ExampleAdapter(exampleList);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
+
+
+
+
+
+        return view;
+
+
     }
 }
