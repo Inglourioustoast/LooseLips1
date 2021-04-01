@@ -74,7 +74,6 @@ public class Profile_activity extends AppCompatActivity implements View.OnClickL
     }
 
 
-
     public void revealMessage() {
         textViewReveal.animate().alpha(0).setDuration(1000);
         mDataBase.child("MOTD").addListenerForSingleValueEvent(

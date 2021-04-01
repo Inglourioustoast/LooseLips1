@@ -2,21 +2,38 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFD27F
-"   android:id="@+id/content"
+"
     tools:context=".MainActivity">
 
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="332dp"
+        android:layout_height="131dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="LooseLips"
+        android:textColor="#cc7a00"
+        android:textSize="64sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/editTextProfileActivityTitle"
         android:layout_width="332dp"
         android:layout_height="131dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="100dp"
         android:fontFamily="sans-serif"
         android:gravity="center"
-        android:text="Welcome to login area"
+        android:text="Welcome User"
         android:textColor="#cc7a00"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -26,12 +43,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/logoutButton"
+        android:id="@+id/signoutButton"
         android:layout_width="337dp"
         android:layout_height="53dp"
         android:layout_marginBottom="108dp"
         android:backgroundTint="@android:color/white"
-        android:text="Logout"
+        android:text="Sign Out"
         android:textColor="#FF9800"
         android:textSize="24sp"
         app:cornerRadius="20dp"
@@ -40,17 +57,31 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/editTextSecretMessage"
-        android:layout_width="326dp"
-        android:layout_height="111dp"
+        android:id="@+id/textViewMOTD"
+        android:layout_width="307dp"
+        android:layout_height="182dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="372dp"
+        android:layout_marginBottom="308dp"
         android:gravity="center"
-        android:text="Welcome, "
+        android:text="unable to get secret Message"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.558"
+        app:layout_constraintHorizontal_bias="0.541"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewReveal"
+        android:layout_width="334dp"
+        android:layout_height="273dp"
+        android:layout_marginBottom="56dp"
+        android:background="#AF6901"
+        android:gravity="center"
+        android:text="Tap To Reveal Secret Message"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/signoutButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
 

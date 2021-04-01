@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +25,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
-
 
 
     public String userStatus;
@@ -35,18 +35,9 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     TextView forgotPassword;
     int inCorrectPasswordCount;
     String userID;
-
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
-
-
     private FirebaseAuth mAuth;
     private DatabaseReference mDataBase;
+
 
     public String getUserStatus() {
         return userStatus;
@@ -55,6 +46,9 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     public void setUserStatus(String userStatus) {
         this.userStatus = userStatus;
     }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +66,6 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         loginButton.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
         register.setOnClickListener(this);
-        setUserStatus("null1");
     }
 
     public void onClick(View v) {
@@ -87,93 +80,84 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.loginButton:
                 progressBar.setVisibility(View.VISIBLE);
-                String email = emailText.getText().toString().trim();
-                String password = passwordText.getText().toString().trim();
+                userLogin();
 
-                if (!Validate_User.validatePassword(password)) {
-                    emailText.setError("Please enter a valid Password");
-                    inCorrectPasswordCount++;
-                    emailText.requestFocus();
-                    return;
-                }
-                if (!Validate_User.validateEmail(email)) {
-                    emailText.setError("Please enter a valid email");
-                    emailText.requestFocus();
+
+        }
+    }
+
+
+
+    private void userLogin() {
+
+        String email = emailText.getText().toString().trim();
+        String password = passwordText.getText().toString().trim();
+
+
+        if (!Validate_User.validatePassword(password)) {
+            emailText.setError("Please enter a valid Password");
+            inCorrectPasswordCount++;
+            emailText.requestFocus();
+            return;
+        }
+        if (!Validate_User.validateEmail(email)) {
+            emailText.setError("Please enter a valid email");
+            emailText.requestFocus();
+            return;
+
+        }
+//sign in with compelte listener
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if(task.isSuccessful()) {
+                    String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    Log.d("info", "Login sucessful, user ID is : " + userID);
+                    //direct to appropriate activity
+                    directToCorrectLoginActivity(userID);
 
                 } else {
-                    //login proccess, signs into firebase + pulls validation status
-                    progressBar.setVisibility(View.VISIBLE);
-                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    Toast.makeText(LoginScreen.this, "user login unsuccessful", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+    }
 
 
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(LoginScreen.this, "Sucesfully logged in", Toast.LENGTH_SHORT).show();
-                                Log.d("debug", "user singed in");
 
-                                Log.d("debug", "about to grab user status");
-                                userID = task.getResult().getUser().getUid();
-                                Log.d("debug", "user status is " + userID);
-                            } else {
-                                Log.d("login failed", "failed to log in");
-                            }
+
+    public void directToCorrectLoginActivity(String userID) {
+        mDataBase.child("Users").child(userID).child("userStatus").addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        setUserStatus(snapshot.getValue().toString());
+                        Log.d("info", "getting user status for " + userID);
+                        Log.d("info", "user status grabbed: " + userStatus);
+
+                        switch (getUserStatus()) {
+
+                            case "Awaiting validation":
+                                startActivity(new Intent(LoginScreen.this, Awaiting_Validation.class));
+                                return;
+                            case "Validated":
+                                startActivity(new Intent(LoginScreen.this, Profile_activity.class));
+                                return;
+                            case "Administrator":
+                                startActivity(new Intent(LoginScreen.this, Admin_screen.class));
+                                return;
+                            case "null":
+                                Toast.makeText(LoginScreen.this, "null detected, failed to direct correctly", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                    Log.d("debug", "about to pull status for " + getUserID());
-                                mDataBase.child("Users").child(getUserID()).child("userStatus").addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    //pulls current user status and switches the login page depending on their status.
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        userStatus = snapshot.getValue().toString();
-                                        Log.d("debug", "user status " + userStatus);
-                                    }
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                    }});
+                    }
 
+                });
 
-
-
-                        }
-
-
-
-                    };
-                    Log.d("info", "Starting switchcase");
-                          switch (userStatus) {
-                                    case "Awaiting Validation": {
-                                        startActivity(new Intent(LoginScreen.this, Awaiting_Validation.class));
-                                        finish();
-                                    }
-                                    case "Administrator": {
-                                        startActivity(new Intent(LoginScreen.this, Admin_screen.class));
-                                        finish();
-                                    }
-                                    case "Validated": {
-                                        startActivity(new Intent(LoginScreen.this, Profile_activity.class));
-                                        finish();
-                                    }
-                              case "null": {
-                                  Log.d("debug", "cant pull user status" );
-                              }
-
-
-
-
-
-
-
-
-                            };
-
-
-
-
-
-                    ;}}
-
-
-
-
-
+    }
+}

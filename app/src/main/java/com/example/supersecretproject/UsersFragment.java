@@ -100,9 +100,6 @@ public class UsersFragment extends Fragment {
                         }
 
 
-
-
-
                     }
 
                     @Override
