@@ -52,10 +52,6 @@ public class Profile_activity extends AppCompatActivity implements View.OnClickL
         signOutButton.setOnClickListener(this);
         textViewReveal.setOnClickListener(this);
 
-
-
-
-
     }
 
 
@@ -75,7 +71,7 @@ public class Profile_activity extends AppCompatActivity implements View.OnClickL
 
 
     public void revealMessage() {
-        textViewReveal.animate().alpha(0).setDuration(1000);
+        textViewReveal.animate().alpha(0).setDuration(1500);
         mDataBase.child("MOTD").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override

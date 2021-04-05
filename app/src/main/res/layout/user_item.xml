@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="4dp"
-    android:layout_marginTop="8dp">
+    android:layout_marginTop="8dp"
+    app:cardCornerRadius="4dp">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:layout_marginTop="4dp">
 
@@ -23,23 +23,73 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="3dp"
             android:layout_toEndOf="@+id/imageView"
-            android:text="Line 1"
+            android:text="Users full Name"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textViewStatusFixed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginStart="-41dp"
+            android:layout_marginTop="34dp"
             android:layout_toEndOf="@+id/imageView"
-            android:text="Line 2"
+            android:text="Status:"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewPasswordAttempt"
+            android:layout_width="206dp"
+            android:layout_height="59dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="141dp"
+            android:layout_marginTop="68dp"
+            android:layout_toEndOf="@+id/imageView"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textViewPasswordAttemptFixed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="-44dp"
+            android:layout_marginTop="85dp"
+            android:layout_toEndOf="@+id/imageView"
+            android:text="Password Attempt: "
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewActualStatus2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="38dp"
+            android:layout_toEndOf="@+id/imageView"
+            android:text="Status:"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/imageViewAddUser"
+            android:layout_width="47dp"
+            android:layout_height="44dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="false"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="86dp"
+            app:srcCompat="@drawable/person_add_" />
 
 
     </RelativeLayout>

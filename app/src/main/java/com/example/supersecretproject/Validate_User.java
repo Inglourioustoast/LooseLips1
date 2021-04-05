@@ -3,6 +3,8 @@ package com.example.supersecretproject;
 public class Validate_User {
 
 
+    //class used to validate input details
+
     public static Boolean validateFirstName(String firstName) {
         if (firstName.isEmpty()) {
             return false;

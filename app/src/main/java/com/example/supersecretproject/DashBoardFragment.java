@@ -42,7 +42,6 @@ public class DashBoardFragment extends Fragment  {
     private String mParam1;
     private String mParam2;
     private EditText editTextMOTD;
-    private Button updateMOTDButton;
     private DatabaseReference mDataBase;
 
 
@@ -54,21 +53,10 @@ public class DashBoardFragment extends Fragment  {
         this.editTextMOTD = editTextMOTD;
     }
 
-
-
     public DashBoardFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DashBoardFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static DashBoardFragment newInstance(String param1, String param2) {
         DashBoardFragment fragment = new DashBoardFragment();
         Bundle args = new Bundle();
@@ -78,19 +66,14 @@ public class DashBoardFragment extends Fragment  {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-
         }
-
-
-
-
-
     }
 
     @Override
@@ -101,27 +84,24 @@ public class DashBoardFragment extends Fragment  {
         EditText editTextMOTD = (EditText) view.findViewById(R.id.editTextMOTD);
 Button updateMOTDButton = (Button) view.findViewById(R.id.updateMOTDButton);
 
+
+//grabs "Secret message from firebase
         mDataBase = FirebaseDatabase.getInstance().getReference();
         mDataBase.child("MOTD").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         editTextMOTD.setText(Objects.requireNonNull(snapshot.getValue()).toString());
-
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         editTextMOTD.setText("could not get secret message, try again later");
                     }
-
                 });
 
+        updateMOTDButton.setOnClickListener(new View.OnClickListener() {
 
-
-
-
-updateMOTDButton.setOnClickListener(new View.OnClickListener() {
+            //updates the MOTD
     @Override
     public void onClick(View v) {
       String MOTDupdate;
@@ -132,17 +112,8 @@ updateMOTDButton.setOnClickListener(new View.OnClickListener() {
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(getActivity(), "MOTD updated successfully", Toast.LENGTH_LONG).show();
                 Log.d("info", "update MOTD button clicked");
-    }
 
-
-
-    }
-    );
-
-    }
-
-
-
+            }}); }
     });
         return view;
     }}

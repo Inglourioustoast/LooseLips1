@@ -8,6 +8,9 @@ public class User {
 
     public String email;
     public String age;
+
+
+
     public String superSecretPassword;
     public String userStatus;
 
@@ -49,4 +52,12 @@ public class User {
         this.userStatus = userStatus;
     }
 
+
+    public String getSuperSecretPassword() {
+        return superSecretPassword;
+    }
+
+    public void setSuperSecretPassword(String superSecretPassword) {
+        this.superSecretPassword = superSecretPassword;
+    }
 }

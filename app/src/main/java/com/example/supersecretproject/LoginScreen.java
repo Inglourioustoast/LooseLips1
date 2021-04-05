@@ -26,7 +26,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
 
-
     public String userStatus;
     EditText emailText, passwordText;
     Button loginButton;
@@ -46,8 +45,6 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     public void setUserStatus(String userStatus) {
         this.userStatus = userStatus;
     }
-
-
 
 
     @Override
@@ -81,32 +78,29 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             case R.id.loginButton:
                 progressBar.setVisibility(View.VISIBLE);
                 userLogin();
-
-
         }
     }
 
-
-
     private void userLogin() {
-
         String email = emailText.getText().toString().trim();
         String password = passwordText.getText().toString().trim();
-
 
         if (!Validate_User.validatePassword(password)) {
             emailText.setError("Please enter a valid Password");
             inCorrectPasswordCount++;
             emailText.requestFocus();
+            progressBar.setVisibility(View.INVISIBLE);
             return;
         }
         if (!Validate_User.validateEmail(email)) {
             emailText.setError("Please enter a valid email");
             emailText.requestFocus();
+            progressBar.setVisibility(View.INVISIBLE);
             return;
 
         }
-//sign in with compelte listener
+
+//sign in
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -114,11 +108,13 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 if(task.isSuccessful()) {
                     String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     Log.d("info", "Login sucessful, user ID is : " + userID);
-                    //direct to appropriate activity
-                    directToCorrectLoginActivity(userID);
 
+                    //direct to appropriate activity depending on "user status" field
+                    directToCorrectLoginActivity(userID);
+                    progressBar.setVisibility(View.INVISIBLE);
                 } else {
-                    Toast.makeText(LoginScreen.this, "user login unsuccessful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginScreen.this, "user login unsuccessful, please check your details", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
 
             }
@@ -154,6 +150,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+
 
                     }
 

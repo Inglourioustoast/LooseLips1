@@ -81,7 +81,6 @@ public class RegisterAccount extends AppCompatActivity implements View.OnClickLi
         String fullName = combineNames(editTextFirstName, editTextLastName);
         int inCorrectPasswordCount = 0;
 
-
         if (!Validate_User.validateFirstName(firstName)) {
             editTextFirstName.setError("please enter a valid first name");
             editTextFirstName.requestFocus();
@@ -111,6 +110,7 @@ public class RegisterAccount extends AppCompatActivity implements View.OnClickLi
             return;
         } else {
 
+            //creates the user and adds class + data to firebase realtime database.
 
             progressBar.setVisibility(View.VISIBLE);
             mAuth.createUserWithEmailAndPassword(email, password)
@@ -133,7 +133,6 @@ public class RegisterAccount extends AppCompatActivity implements View.OnClickLi
                                             Toast.makeText(RegisterAccount.this, "User has been registered sucessfully", Toast.LENGTH_LONG).show();
                                             progressBar.setVisibility(View.INVISIBLE);
                                             startActivity(new Intent(RegisterAccount.this, Awaiting_Validation.class));
-
 
                                         } else {
 
