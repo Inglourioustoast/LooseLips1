@@ -22,13 +22,12 @@ public class ForgotPassword extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
-
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
 
     }
 
-
+//begins the password reset process, handled with firebase mostly.
     public void resetPassword(View v) {
         String email = editTextEmail.getText().toString().trim();
 

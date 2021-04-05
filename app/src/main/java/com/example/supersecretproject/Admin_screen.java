@@ -17,6 +17,9 @@ import android.widget.EditText;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+//admin screen used to host fragments.
+
+
 public class Admin_screen extends AppCompatActivity {
 
     private Button updateMOTDButton, viewUsersButton;
@@ -29,10 +32,8 @@ public class Admin_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_screen);
 
-
        BottomNavigationView bottomNavBar =  findViewById(R.id.bottomNavigationView);
-
-        bottomNavBar.setOnNavigationItemSelectedListener(navListener);
+       bottomNavBar.setOnNavigationItemSelectedListener(navListener);
 
     }
 
@@ -58,7 +59,6 @@ public class Admin_screen extends AppCompatActivity {
                     }
 
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment, selectedFragment).commit();
-
 
                     return true;
                 }
