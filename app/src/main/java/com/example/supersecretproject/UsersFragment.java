@@ -117,7 +117,7 @@ public class UsersFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this.getActivity());
-        mAdapter = new UserArrayAdapter(userArrayList);
+        mAdapter = new UserArrayAdapter(userArrayList, getContext());
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);

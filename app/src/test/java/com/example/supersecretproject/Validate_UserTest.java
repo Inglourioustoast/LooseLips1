@@ -7,6 +7,19 @@ import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
 public class Validate_UserTest {
+    @Test
+    public void createNewUser() {
+
+                User Jake = new User("Jake Dove", "29", "Jake.dove@testEmail.com", "Love Bacon");
+                User Harry = new User("Harry Smith", "37", "Smithers86@gmail.co.uk", "Dunno lol");
+                User Dave = new User("Dave Fielding", "19", "Dave_Fielding", "Cant be bothered");
+
+        assertEquals("Error in creating a user", "Jake Dove",    Jake.getFullName());
+        assertEquals("Error in getting users email", "Smithers86@gmail.co.uk", Harry.getEmail());
+    }
+
+
+
 
     @Test
     public void validateFirstName() {
@@ -67,7 +80,8 @@ public class Validate_UserTest {
 
     }
 
-    public void validatePasswordConfirmation(String password, String passwordConfirm) {
+    public void testValidatePasswordConfirmation() {
+
 
 
         assertFalse("bleh", false);
