@@ -8,7 +8,7 @@
     android:background="#FFD27F">
 
     <Button
-        android:id="@+id/signoutButton2"
+        android:id="@+id/signoutButton"
         android:layout_width="337dp"
         android:layout_height="53dp"
         android:layout_marginBottom="108dp"

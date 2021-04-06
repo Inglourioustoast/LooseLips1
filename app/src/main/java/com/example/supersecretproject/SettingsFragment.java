@@ -1,5 +1,6 @@
 package com.example.supersecretproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +34,7 @@ public class SettingsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Button signoutButton;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -71,7 +74,18 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        Button signoutButton = (Button) view.findViewById(R.id.signoutButton);
+        signoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), LoginScreen.class));
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(getActivity(), "Signed out", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return view;
 
     }
 }

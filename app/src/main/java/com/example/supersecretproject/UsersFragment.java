@@ -34,6 +34,8 @@ import java.util.Objects;
  */
 public class UsersFragment extends Fragment {
 
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -142,6 +144,7 @@ public class UsersFragment extends Fragment {
 
 
 //gets the userID from the box the button is pressed in and passes it to updateUserStatusToValidate for status change.
+                    userArrayList.get(position).setUserStatus("Validated");
                 mDataBase.child("Users")
                         .orderByChild("fullName")
                         .equalTo(userArrayList.get(position).getFullName())
@@ -153,6 +156,7 @@ public class UsersFragment extends Fragment {
                                      userID[0] = childSnapshot.getKey();
                                 }
                                 updateUserStatusToValidated(userID[0]);
+                                mAdapter.notifyItemChanged(position);
                             }
 
                             @Override
@@ -160,6 +164,7 @@ public class UsersFragment extends Fragment {
 
                             }
                         });
+
                 }
             }
         });
@@ -185,12 +190,17 @@ public class UsersFragment extends Fragment {
         mDataBase.child("Users").child(userID).child("userStatus").setValue("Validated").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(getActivity(), "user has been validated, please refresh", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "user has been validated", Toast.LENGTH_SHORT).show();
                 Log.d("info", userID + "has been set to validated");
 
-            mAdapter.notifyDataSetChanged();
+
+
+
             }
         });
     }
+
+
+
 
 }

@@ -2,6 +2,8 @@ package com.example.supersecretproject;
 
 import org.junit.Test;
 
+import static org.mockito.Mockito.*;
+
 import static org.junit.Assert.*;
 
 public class Validate_UserTest {
@@ -70,10 +72,13 @@ public class Validate_UserTest {
 
         assertFalse("bleh", false);
         assertTrue("Password1!", false);
-
-
-
-
+        assertTrue("Password1", true);
+        assertFalse("bleh", false);
+        assertFalse("123456", false);
+        assertFalse("password", false);
+        assertFalse("", false);
+        assertFalse(" ", false);
+        assertFalse("bleh", false);
 
     }
 

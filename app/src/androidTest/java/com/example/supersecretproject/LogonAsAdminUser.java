@@ -30,13 +30,13 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LoginWithNormalUserTest {
+public class LogonAsAdminUser {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void loginWithNormalUserTest() {
+    public void logonAsAdminUser() throws InterruptedException {
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.loginButton), withText("Get Started!"),
                         childAtPosition(
@@ -55,39 +55,9 @@ public class LoginWithNormalUserTest {
                                         0),
                                 3),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("NormallUser@Outlook.com"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("AdminAccount@Outlook.com"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.editTextEmail), withText("NormallUser@Outlook.com"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                3),
-                        isDisplayed()));
-        appCompatEditText2.perform(click());
-
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.editTextEmail), withText("NormallUser@Outlook.com"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                3),
-                        isDisplayed()));
-        appCompatEditText3.perform(replaceText("NormalUser@Outlook.com"));
-
-        ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.editTextEmail), withText("NormalUser@Outlook.com"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                3),
-                        isDisplayed()));
-        appCompatEditText4.perform(closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText5 = onView(
                 allOf(withId(R.id.editTextPassword),
                         childAtPosition(
                                 childAtPosition(
@@ -95,7 +65,7 @@ public class LoginWithNormalUserTest {
                                         0),
                                 4),
                         isDisplayed()));
-        appCompatEditText5.perform(replaceText("Password1!"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("Password1!"), closeSoftKeyboard());
 
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.loginButton), withText("Login"),
@@ -107,21 +77,19 @@ public class LoginWithNormalUserTest {
                         isDisplayed()));
         materialButton2.perform(click());
 
-        ViewInteraction materialTextView = onView(
-                allOf(withId(R.id.textViewReveal), withText("Tap To Reveal Secret Message"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                4),
-                        isDisplayed()));
-        materialTextView.perform(click());
+        Thread.sleep(2000);
 
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.textViewMOTD), withText("Flamingoes can only eat with their heads upside down"),
-                        withParent(withParent(withId(android.R.id.content))),
+        ViewInteraction button = onView(
+                allOf(withId(R.id.updateMOTDButton), withText("UPDATE MOTD"),
+                        withParent(withParent(withId(R.id.fragment))),
                         isDisplayed()));
-        textView.check(matches(isDisplayed()));
+        button.check(matches(isDisplayed()));
+
+        ViewInteraction editText = onView(
+                allOf(withId(R.id.editTextMOTD), withText("Flamingoes can only eat with their heads upside down...\n\nPlease keep this info to yourself!\n"),
+                        withParent(withParent(withId(R.id.fragment))),
+                        isDisplayed()));
+        editText.check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
