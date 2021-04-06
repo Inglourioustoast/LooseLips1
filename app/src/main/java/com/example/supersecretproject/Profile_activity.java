@@ -29,7 +29,7 @@ public class Profile_activity extends AppCompatActivity implements View.OnClickL
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDataBase;
-
+    private ScratchCard mScratchCard;
     public TextView getTextViewMOTD() {
         return textViewMOTD;
     }
@@ -43,6 +43,8 @@ public class Profile_activity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_activity);
 
+        mScratchCard = findViewById(R.id.scratchCard);
+
         textViewMOTD = (TextView) findViewById(R.id.textViewMOTD);
         textViewReveal = (TextView) findViewById(R.id.textViewReveal);
         signOutButton = (Button) findViewById(R.id.signoutButton);
@@ -51,21 +53,39 @@ public class Profile_activity extends AppCompatActivity implements View.OnClickL
 
         signOutButton.setOnClickListener(this);
         textViewReveal.setOnClickListener(this);
-
+        revealMessage();
     }
+
+    private void scratch(boolean isScratched) {
+        if (isScratched) {
+            mScratchCard.setVisibility(View.INVISIBLE);
+        } else {
+            mScratchCard.setVisibility(View.VISIBLE);
+        }
+    }
+
+/*//tracks how much of the scratch card is scratched. POSSIBLY NOT NEEDED REMOVE BEFORE FINAL
+    private void handleListeners() {
+        mScratchCard.setOnScratchListener(new ScratchCard.OnScratchListener() {
+            @Override
+            public void onScratch(ScratchCard scratchCard, float visiblePercent) {
+
+                if (visiblePercent > 0.8) {
+                    scratch(true);
+                }
+            }
+        });
+    }*/
+
+
 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.signoutButton:
-                startActivity(new Intent(this, LoginScreen.class));
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(Profile_activity.this, "Signed out", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.textViewReveal:
-                revealMessage();
-                break;
+        if (v.getId() == R.id.signoutButton) {
+            startActivity(new Intent(this, LoginScreen.class));
+            FirebaseAuth.getInstance().signOut();
+            Toast.makeText(Profile_activity.this, "Signed out", Toast.LENGTH_SHORT).show();
         }
     }
 

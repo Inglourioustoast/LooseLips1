@@ -1,6 +1,6 @@
 package com.example.supersecretproject;
 
-import android.util.Log;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +16,17 @@ import java.util.ArrayList;
 
 public class UserArrayAdapter extends RecyclerView.Adapter<UserArrayAdapter.UserViewHolder> {
     private OnItemClickListener mListener;
-
+    private Context context;
+    public  UserArrayAdapter(ArrayList <User> list, Context context) {
+        this.context = context;
+        this.mUserArrayList = list;
+    }
     public interface OnItemClickListener {
         void onItemClick(int position);
 
         void onAddUserClick(int position);
     }
-
+        // CONSTRUCTORS
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
@@ -37,12 +41,13 @@ public class UserArrayAdapter extends RecyclerView.Adapter<UserArrayAdapter.User
         public TextView textViewActualStatus;
         public TextView textViewPasswordAttempt;
         public ImageView addUser;
+        private Context  context;
 
         public UserViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
 
             mImageView = itemView.findViewById(R.id.imageView);
-            mTextView1 = itemView.findViewById(R.id.textView);
+            mTextView1 = itemView.findViewById(R.id.textViewTitle);
             textViewActualStatus = itemView.findViewById(R.id.textViewActualStatus2);
             textViewPasswordAttempt = itemView.findViewById(R.id.textViewPasswordAttempt);
             addUser = itemView.findViewById(R.id.imageViewAddUser);
@@ -97,6 +102,9 @@ public class UserArrayAdapter extends RecyclerView.Adapter<UserArrayAdapter.User
         User currentItem = mUserArrayList.get(position);
 
         // holder.mImageView.setImageResource(currentItem.getmImageResource());
+        if (currentItem.getUserStatus().equals("Awaiting validation")) {
+            holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.red));
+        }
         holder.mTextView1.setText(currentItem.getFullName());
         holder.textViewActualStatus.setText(currentItem.getUserStatus());
         holder.textViewPasswordAttempt.setText(currentItem.getSuperSecretPassword());
