@@ -7,8 +7,6 @@
     <item android:title="Users"
         android:id="@+id/usersFragment"
         android:icon="@drawable/people"/>
-    <item android:title="Settings"
-        android:id="@+id/settingsFragment"
-        android:icon="@drawable/settings"/>
+
 
 </menu>

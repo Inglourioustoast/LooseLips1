@@ -9,6 +9,8 @@ import android.widget.Button;
 
 public class Awaiting_Validation extends AppCompatActivity implements View.OnClickListener {
 
+    //simply page for when the user is still in the "awaiting validation" stage
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

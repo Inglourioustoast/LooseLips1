@@ -2,11 +2,15 @@ package com.example.supersecretproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +37,7 @@ public class Profile_activity extends AppCompatActivity implements View.OnClickL
     public TextView getTextViewMOTD() {
         return textViewMOTD;
     }
+    private Toolbar mTopToolbar;
 
     public void setTextViewMOTD(TextView textViewMOTD) {
         this.textViewMOTD = textViewMOTD;
@@ -43,35 +48,41 @@ public class Profile_activity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_activity);
 
-        mScratchCard = findViewById(R.id.scratchCard);
 
+        mScratchCard = findViewById(R.id.scratchCard);
         textViewMOTD = (TextView) findViewById(R.id.textViewMOTD);
         textViewReveal = (TextView) findViewById(R.id.textViewReveal);
         signOutButton = (Button) findViewById(R.id.signoutButton);
         mAuth = FirebaseAuth.getInstance();
         mDataBase = FirebaseDatabase.getInstance().getReference();
-
         signOutButton.setOnClickListener(this);
         textViewReveal.setOnClickListener(this);
-        revealMessage();
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+        revealMessage();  // fades out the "scratch to reveal' textView on startup
     }
 
     private void scratch(boolean isScratched) {
         if (isScratched) {
             mScratchCard.setVisibility(View.INVISIBLE);
+            revealMessage();
         } else {
             mScratchCard.setVisibility(View.VISIBLE);
         }
     }
 
-/*//tracks how much of the scratch card is scratched. POSSIBLY NOT NEEDED REMOVE BEFORE FINAL
+/*
     private void handleListeners() {
         mScratchCard.setOnScratchListener(new ScratchCard.OnScratchListener() {
             @Override
             public void onScratch(ScratchCard scratchCard, float visiblePercent) {
 
-                if (visiblePercent > 0.8) {
+                if (visiblePercent > 99) {
                     scratch(true);
+                    revealMessage();
                 }
             }
         });
@@ -86,12 +97,16 @@ public class Profile_activity extends AppCompatActivity implements View.OnClickL
             startActivity(new Intent(this, LoginScreen.class));
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(Profile_activity.this, "Signed out", Toast.LENGTH_SHORT).show();
+        } else if   (v.getId() == R.id.textViewReveal) {
+
+            revealMessage();
+
         }
     }
 
 
     public void revealMessage() {
-        textViewReveal.animate().alpha(0).setDuration(1500);
+        textViewReveal.animate().alpha(0).setDuration(3000);
         mDataBase.child("MOTD").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
@@ -108,5 +123,7 @@ public class Profile_activity extends AppCompatActivity implements View.OnClickL
         );
 
     }
+
+
 
 }

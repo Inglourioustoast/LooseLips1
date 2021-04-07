@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,16 +19,19 @@ import java.util.ArrayList;
 public class UserArrayAdapter extends RecyclerView.Adapter<UserArrayAdapter.UserViewHolder> {
     private OnItemClickListener mListener;
     private Context context;
-    public  UserArrayAdapter(ArrayList <User> list, Context context) {
+
+    public UserArrayAdapter(ArrayList<User> list, Context context) {
         this.context = context;
         this.mUserArrayList = list;
     }
+
     public interface OnItemClickListener {
         void onItemClick(int position);
 
         void onAddUserClick(int position);
     }
-        // CONSTRUCTORS
+
+    // CONSTRUCTORS
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
@@ -41,7 +46,7 @@ public class UserArrayAdapter extends RecyclerView.Adapter<UserArrayAdapter.User
         public TextView textViewActualStatus;
         public TextView textViewPasswordAttempt;
         public ImageView addUser;
-        private Context  context;
+        private Context context;
 
         public UserViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
@@ -71,10 +76,33 @@ public class UserArrayAdapter extends RecyclerView.Adapter<UserArrayAdapter.User
             addUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    //on click listener to animate card when clicked, currently crashing the app
+
+                    /*  Animation shakeCard = AnimationUtils.loadAnimation(context, R.anim.shake);
+                    shakeCard.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });*/
+
+
                     if (listener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             listener.onAddUserClick(position);
+
 
                         }
                     }
@@ -104,14 +132,11 @@ public class UserArrayAdapter extends RecyclerView.Adapter<UserArrayAdapter.User
         // holder.mImageView.setImageResource(currentItem.getmImageResource());
         if (currentItem.getUserStatus().equals("Awaiting validation")) {
             holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.red));
+
         }
         holder.mTextView1.setText(currentItem.getFullName());
         holder.textViewActualStatus.setText(currentItem.getUserStatus());
         holder.textViewPasswordAttempt.setText(currentItem.getSuperSecretPassword());
-
-
-
-
 
     }
 
@@ -120,11 +145,12 @@ public class UserArrayAdapter extends RecyclerView.Adapter<UserArrayAdapter.User
         return mUserArrayList.size();
     }
 
-
+public void shakeCard(int position) {
+        User currentItem = mUserArrayList.get(position);
 
 }
 
 
 
-
+}
 

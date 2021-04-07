@@ -20,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 //admin screen used to host fragments.
 
 
+
 public class Admin_screen extends AppCompatActivity {
 
     private Button updateMOTDButton, viewUsersButton;
@@ -31,12 +32,11 @@ public class Admin_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_screen);
-
-       BottomNavigationView bottomNavBar =  findViewById(R.id.bottomNavigationView);
-       bottomNavBar.setOnNavigationItemSelectedListener(navListener);
+        BottomNavigationView bottomNavBar =  findViewById(R.id.bottomNav);
+        bottomNavBar.setOnNavigationItemSelectedListener(navListener);
 
     }
-
+//bottom nav bar, switch case picks up selection and plays the appropirate animations
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -47,14 +47,14 @@ public class Admin_screen extends AppCompatActivity {
 
                         case R.id.dashBoardFragment:
                             selectedFragment = new DashBoardFragment();
-                            break;
-
-                        case R.id.settingsFragment:
-                            selectedFragment = new SettingsFragment();
+                           getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,  android.R.anim.slide_out_right, R.anim.slide_in_left, R.anim.slide_in_left)
+                                   .replace(R.id.fragment, selectedFragment).addToBackStack(null).commit();
                             break;
 
                         case R.id.usersFragment:
                             selectedFragment = new UsersFragment();
+                            getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_out_right,  android.R.anim.slide_in_left, R.anim.slide_in_left, R.anim.slide_in_left)
+                                    .replace(R.id.fragment, selectedFragment).addToBackStack(null).commit();
                             break;
                     }
 

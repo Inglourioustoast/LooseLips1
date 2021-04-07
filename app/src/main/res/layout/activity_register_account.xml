@@ -4,18 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFD27F
-"
+    android:background="@drawable/orangebackground"
+
     tools:context=".MainActivity">
 
 
     <EditText
         android:id="@+id/editTextSecretPassword"
         android:layout_width="266dp"
-        android:layout_height="53dp"
+        android:layout_height="40dp"
         android:layout_marginTop="424dp"
         android:ems="10"
+        android:background="@drawable/edittextborder"
         android:hint="Secret Password"
+        android:gravity="center"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -25,13 +27,16 @@
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="266dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="36dp"
+
+        android:layout_height="40dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/edittextborder"
         android:ems="10"
+        android:gravity="center"
         android:hint="Email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
@@ -41,6 +46,7 @@
         android:layout_width="267dp"
         android:layout_height="296dp"
         android:layout_marginTop="232dp"
+        android:gravity="center"
         android:progressTint="#FD9C0E"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,82 +57,97 @@
     <EditText
         android:id="@+id/editTextAge"
         android:layout_width="266dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="320dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextborder"
         android:ems="10"
+        android:gravity="center"
         android:hint="Age"
         android:inputType="number|textEmailAddress"
         android:maxLength="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordConfirm" />
 
     <EditText
         android:id="@+id/editTextUserPassword"
         android:layout_width="266dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextborder"
         android:ems="10"
+        android:gravity="center"
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextLastName" />
 
     <EditText
         android:id="@+id/editTextPasswordConfirm"
         android:layout_width="266dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="260dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextborder"
         android:ems="10"
+        android:gravity="center"
         android:hint="Confirm Password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextUserPassword" />
 
     <EditText
         android:id="@+id/editTextFirstName"
         android:layout_width="266dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="96dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextborder"
         android:ems="10"
+        android:gravity="center"
         android:hint="First Name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
 
     <EditText
         android:id="@+id/editTextLastName"
         android:layout_width="266dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="152dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextborder"
         android:ems="10"
+        android:gravity="center"
+
         android:hint="Surname"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextFirstName" />
 
     <TextView
         android:id="@+id/subTitleRegister"
-        android:layout_width="332dp"
-        android:layout_height="131dp"
+        style="@style/AudioFileInfoOverlayText"
+        android:layout_width="342dp"
+        android:layout_height="93dp"
         android:layout_marginTop="88dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/fredoka"
         android:gravity="center"
+        android:outlineSpotShadowColor="#FFFFFF"
         android:text="Account Registration"
-        android:textColor="#cc7a00"
+        android:textColor="#EDE4D6"
+
+
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintHorizontal_bias="0.42"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -146,17 +167,20 @@
 
     <TextView
         android:id="@+id/textViewTitle"
+        style="@style/AudioFileInfoOverlayText"
         android:layout_width="332dp"
         android:layout_height="131dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="sans-serif"
+        android:layout_marginTop="12dp"
+
+        android:fontFamily="@font/fredoka"
         android:gravity="center"
+        android:outlineSpotShadowColor="#FFFFFF"
         android:text="LooseLips"
-        android:textColor="#cc7a00"
-        android:textSize="64sp"
+        android:textColor="#EDE4D6"
+        android:textSize="68sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -168,6 +192,7 @@
         android:text="To confirm signup, enter the super secret password"
         app:layout_constraintBottom_toTopOf="@+id/editTextSecretPassword"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 

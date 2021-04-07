@@ -4,8 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFD27F"
+
     tools:context=".DashBoardFragment">
+
+    <include layout="@layout/toolbar" />
+
 
 
     <Button
@@ -22,51 +25,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewSubHeader"
-        android:layout_width="354dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="84dp"
-        android:fontFamily="sans-serif"
-        android:gravity="center"
-        android:text="Welcome Administrator"
-        android:textColor="#cc7a00"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="332dp"
-        android:layout_height="131dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif"
-        android:gravity="center"
-        android:text="LooseLips"
-        android:textColor="#cc7a00"
-        android:textSize="64sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.468"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <EditText
         android:id="@+id/editTextMOTD"
-        android:layout_width="295dp"
-        android:layout_height="132dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="283dp"
+        android:layout_height="199dp"
+        android:layout_marginBottom="164dp"
+        android:background="@drawable/edittextborder"
         android:ems="10"
-        android:gravity="start|top"
+        android:foregroundGravity="center|center_horizontal"
+        android:gravity="center|center_vertical"
+        android:hint="unable to get secret message"
         android:inputType="textMultiLine"
+        android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/updateMOTDButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSubHeader"
-        app:layout_constraintVertical_bias="0.261" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.985" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

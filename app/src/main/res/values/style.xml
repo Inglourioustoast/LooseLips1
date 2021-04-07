@@ -11,4 +11,19 @@
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">5</item>
     </style>
+
+    <style name="Widget.App.ActionMode" parent="Widget.AppCompat.ActionMode">
+        <item name="titleTextStyle">?attr/textAppearanceHeadline6</item>
+        <item name="subtitleTextStyle">?attr/textAppearanceSubtitle1</item>
+        <item name="background">@color/material_grey_900</item>
+    </style>
+
+    <style name="HeaderBar">
+        <item name="android:background">#303F9F</item>
+    </style>
+
+    <style name="CustomActionBar">
+    CustomActionBar
+    </style>
+
 </resources>

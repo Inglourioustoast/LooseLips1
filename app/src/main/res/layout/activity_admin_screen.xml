@@ -6,6 +6,26 @@
     android:layout_height="match_parent"
     android:background="@drawable/orangebackground">
 
+    <include layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        style="@style/AudioFileInfoOverlayText"
+        android:layout_width="332dp"
+        android:layout_height="131dp"
+        android:layout_marginTop="12dp"
+
+        android:fontFamily="@font/fredoka"
+        android:gravity="center"
+        android:outlineSpotShadowColor="#FFFFFF"
+        android:text="LooseLips"
+        android:textColor="#EDE4D6"
+        android:textSize="68sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewSubHeader"
@@ -23,21 +43,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="332dp"
-        android:layout_height="131dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif"
-        android:gravity="center"
-        android:text="LooseLips"
-        android:textColor="#cc7a00"
-        android:textSize="64sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.468"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="wrap_content"
@@ -55,14 +60,14 @@
         android:layout_height="match_parent"
         android:background="#cc7a00"
         app:defaultNavHost="true"
-        android:layout_above="@id/bottomNavigationView"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        android:layout_above="@id/bottomNav"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/my_nav" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+        android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#cc7a00"

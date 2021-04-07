@@ -64,7 +64,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         forgotPassword.setOnClickListener(this);
         register.setOnClickListener(this);
     }
-
+//various onClicks
     public void onClick(View v) {
         switch (v.getId()) {
             ///  case R.id.loginButton

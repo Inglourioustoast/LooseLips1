@@ -1,5 +1,6 @@
 package com.example.supersecretproject;
 
+import android.animation.Animator;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -8,10 +9,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -45,6 +50,7 @@ public class UsersFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private DatabaseReference mDataBase;
     private ArrayList<User> userArrayList;
+    Animation shakeAnimation;
 
 
     // TODO: Rename and change types of parameters
@@ -69,6 +75,9 @@ public class UsersFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //animation load
+        shakeAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -79,6 +88,7 @@ public class UsersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_users, container, false);
+
 
         //creates the usersArrayList and populates it with firebase snapshot.
 
@@ -136,11 +146,13 @@ public class UsersFragment extends Fragment {
 
                 if (userArrayList.get(position).getUserStatus().equals("Validated")) {
                     Toast.makeText(getActivity(), "This user is already validated", Toast.LENGTH_SHORT).show();
+
+
                     return;
                 } if (userArrayList.get(position).getUserStatus().equals("Administrator")) {
                     Toast.makeText(getActivity(), "This user is an Admin", Toast.LENGTH_SHORT).show();
                     return;
-                } else {
+                } else { ;
 
 
 //gets the userID from the box the button is pressed in and passes it to updateUserStatusToValidate for status change.

@@ -68,7 +68,7 @@ public class ScratchCard extends View {
             mDrawable.setBounds(0, 0, mBitmap.getWidth(), mBitmap.getHeight());
             mDrawable.draw(mCanvas);
         } else {
-            mCanvas.drawColor(0xFF8A580C);
+            mCanvas.drawColor(getContext().getColor(R.color.red));
         }
 
         if (mPath == null) {
