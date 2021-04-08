@@ -27,11 +27,12 @@ public class UserArrayAdapter extends RecyclerView.Adapter<UserArrayAdapter.User
 
     public interface OnItemClickListener {
         void onItemClick(int position);
-
         void onAddUserClick(int position);
+
+
     }
 
-    // CONSTRUCTORS
+    // constructors for the arrayAdapter
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
@@ -39,8 +40,7 @@ public class UserArrayAdapter extends RecyclerView.Adapter<UserArrayAdapter.User
     public ArrayList<User> mUserArrayList;
 
     public static class UserViewHolder extends RecyclerView.ViewHolder {
-
-
+//declarations
         public ImageView mImageView;
         public TextView mTextView1;
         public TextView textViewActualStatus;
@@ -48,6 +48,7 @@ public class UserArrayAdapter extends RecyclerView.Adapter<UserArrayAdapter.User
         public ImageView addUser;
         private Context context;
 
+        //sets on click listeners
         public UserViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
 
@@ -67,6 +68,7 @@ public class UserArrayAdapter extends RecyclerView.Adapter<UserArrayAdapter.User
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             listener.onItemClick(position);
+
                         }
 
                     }
@@ -103,7 +105,6 @@ public class UserArrayAdapter extends RecyclerView.Adapter<UserArrayAdapter.User
                         if (position != RecyclerView.NO_POSITION) {
                             listener.onAddUserClick(position);
 
-
                         }
                     }
                 }
@@ -124,7 +125,7 @@ public class UserArrayAdapter extends RecyclerView.Adapter<UserArrayAdapter.User
         return uvh;
     }
 
-
+//populates the card and runs some validation on the data and
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User currentItem = mUserArrayList.get(position);
@@ -140,17 +141,25 @@ public class UserArrayAdapter extends RecyclerView.Adapter<UserArrayAdapter.User
 
     }
 
+    //returns the item count of the list, needed to generate teh recycler view
     @Override
     public int getItemCount() {
         return mUserArrayList.size();
     }
 
-public void shakeCard(int position) {
-        User currentItem = mUserArrayList.get(position);
-
-}
-
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
 

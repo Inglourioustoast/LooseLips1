@@ -37,7 +37,7 @@ public class Profile_activity extends AppCompatActivity implements View.OnClickL
     public TextView getTextViewMOTD() {
         return textViewMOTD;
     }
-    private Toolbar mTopToolbar;
+    androidx.appcompat.widget.Toolbar toolBar;
 
     public void setTextViewMOTD(TextView textViewMOTD) {
         this.textViewMOTD = textViewMOTD;

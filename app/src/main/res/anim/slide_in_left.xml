@@ -3,5 +3,7 @@
     <translate
         android:duration="200"
         android:fromXDelta="-100%"
+        android:startOffset="150"
         android:toXDelta="0%" />
+
 </set>

@@ -133,6 +133,7 @@ public class UsersFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener(new UserArrayAdapter.OnItemClickListener() {
+
             @Override
             public void onItemClick(int position) {
                 Log.d("info", "card pressed");

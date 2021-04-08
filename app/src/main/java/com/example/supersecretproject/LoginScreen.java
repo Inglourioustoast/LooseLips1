@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -63,8 +65,24 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         loginButton.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
         register.setOnClickListener(this);
+
+        //Listener for pressing enter int eh password field and hitting enter --> login
+
+        passwordText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_GO) {
+                    userLogin();
+                    handled = true;
+                }
+                return handled;
+            }
+        });
     }
-//various onClicks
+
+
+    //various onClickslisteners for buttons
     public void onClick(View v) {
         switch (v.getId()) {
             ///  case R.id.loginButton
@@ -81,6 +99,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         }
     }
 
+    //checks login details locally before submitting to firebase for auth
     private void userLogin() {
         String email = emailText.getText().toString().trim();
         String password = passwordText.getText().toString().trim();
@@ -100,7 +119,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
         }
 
-//sign in
+
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -120,7 +139,6 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             }
         });
     }
-
 
 
 
@@ -155,6 +173,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                     }
 
                 });
+
+
 
     }
 }

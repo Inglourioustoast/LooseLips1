@@ -53,6 +53,8 @@
         android:ems="10"
         android:gravity="center"
         android:hint="Password"
+        android:imeOptions="actionGo"
+        android:singleLine="true"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.475"

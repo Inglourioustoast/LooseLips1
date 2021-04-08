@@ -5,29 +5,9 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UsersFragment"
-    android:background="@drawable/orangebackground"
+
     >
 
-    <include layout="@layout/toolbar" />
-
-    <TextView
-        android:id="@+id/textViewTitle"
-        style="@style/AudioFileInfoOverlayText"
-        android:layout_width="332dp"
-        android:layout_height="131dp"
-        android:layout_marginTop="24dp"
-
-        android:fontFamily="@font/fredoka"
-        android:gravity="center"
-        android:outlineSpotShadowColor="#FFFFFF"
-        android:text="LooseLips"
-        android:textColor="#EDE4D6"
-        android:textSize="68sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

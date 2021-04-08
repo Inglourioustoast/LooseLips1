@@ -81,13 +81,13 @@ public class LogonAsAdminUser {
 
         ViewInteraction button = onView(
                 allOf(withId(R.id.updateMOTDButton), withText("UPDATE MOTD"),
-                        withParent(withParent(withId(R.id.fragment))),
+                        withParent(withParent(withId(R.id.fragmentContainer))),
                         isDisplayed()));
         button.check(matches(isDisplayed()));
 
         ViewInteraction editText = onView(
                 allOf(withId(R.id.editTextMOTD), withText("Flamingoes can only eat with their heads upside down...\n\nPlease keep this info to yourself!\n"),
-                        withParent(withParent(withId(R.id.fragment))),
+                        withParent(withParent(withId(R.id.fragmentContainer))),
                         isDisplayed()));
         editText.check(matches(isDisplayed()));
     }

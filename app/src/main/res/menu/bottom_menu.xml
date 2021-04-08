@@ -3,7 +3,8 @@
 
     <item android:title="Secret Message"
         android:id="@+id/dashBoardFragment"
-        android:icon="@drawable/privacy"/>
+        android:icon="@drawable/privacy" />
+
     <item android:title="Users"
         android:id="@+id/usersFragment"
         android:icon="@drawable/people"/>

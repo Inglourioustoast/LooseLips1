@@ -7,15 +7,12 @@
 
     tools:context=".DashBoardFragment">
 
-    <include layout="@layout/toolbar" />
-
-
 
     <Button
         android:id="@+id/updateMOTDButton"
         android:layout_width="337dp"
         android:layout_height="53dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginBottom="64dp"
         android:backgroundTint="@android:color/white"
         android:text="update MOTD"
         android:textColor="#FF9800"
@@ -26,13 +23,11 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-
-
     <EditText
         android:id="@+id/editTextMOTD"
         android:layout_width="283dp"
         android:layout_height="199dp"
-        android:layout_marginBottom="164dp"
+        android:layout_marginBottom="72dp"
         android:background="@drawable/edittextborder"
         android:ems="10"
         android:foregroundGravity="center|center_horizontal"
