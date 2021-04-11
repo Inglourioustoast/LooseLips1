@@ -5,49 +5,22 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UsersFragment"
-    android:background="#FFD27F">
 
-    <TextView
-        android:id="@+id/textViewSubHeader"
-        android:layout_width="354dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="84dp"
-        android:fontFamily="sans-serif"
-        android:gravity="center"
-        android:text="Welcome Administrator"
-        android:textColor="#cc7a00"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    >
 
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="332dp"
-        android:layout_height="131dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif"
-        android:gravity="center"
-        android:text="LooseLips"
-        android:textColor="#cc7a00"
-        android:textSize="64sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.468"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="347dp"
-        android:layout_height="381dp"
+        android:layout_width="386dp"
+        android:layout_height="533dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSubHeader"
-        app:layout_constraintVertical_bias="0.205" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.641" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

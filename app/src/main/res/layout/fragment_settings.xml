@@ -4,8 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".SettingsFragment"
-    android:background="#FFD27F">
+
+    android:background="@drawable/orangebackground">
+
+    <include layout="@layout/toolbar" />
 
     <Button
         android:id="@+id/signoutButton"
@@ -21,35 +23,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewSubHeader"
-        android:layout_width="354dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="84dp"
-        android:fontFamily="sans-serif"
-        android:gravity="center"
-        android:text="Welcome Administrator"
-        android:textColor="#cc7a00"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/textViewTitle"
+        style="@style/AudioFileInfoOverlayText"
         android:layout_width="332dp"
         android:layout_height="131dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif"
+        android:layout_marginTop="24dp"
+
+        android:fontFamily="@font/fredoka"
         android:gravity="center"
+        android:outlineSpotShadowColor="#FFFFFF"
         android:text="LooseLips"
-        android:textColor="#cc7a00"
-        android:textSize="64sp"
+        android:textColor="#EDE4D6"
+        android:textSize="68sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

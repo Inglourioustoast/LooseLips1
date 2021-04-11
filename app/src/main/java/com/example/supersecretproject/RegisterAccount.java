@@ -31,8 +31,8 @@ public class RegisterAccount extends AppCompatActivity implements View.OnClickLi
     private EditText editTextAge;
     private EditText editTextEmail;
     private EditText editTextPasswordConfirm;
-    private EditText editTextFirstName;
-    private EditText editTextUserPassword;
+    private EditText editTextFirstName, editTextUserPassword;
+
     private EditText editTextLastName;
 
     private Button RegisterAccountButton;

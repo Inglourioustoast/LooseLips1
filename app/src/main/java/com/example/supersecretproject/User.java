@@ -3,25 +3,16 @@ package com.example.supersecretproject;
 public class User {
 
     public String fullName;
-
-
-
     public String email;
     public String age;
-
-
-
     public String superSecretPassword;
     public String userStatus;
-
-
-    public User() {
-
-    }
+    public User() { }
 
     public String getFullName() {
         return fullName;
     }
+
 
     public void setFullName(String fullName) {
         this.fullName = fullName;

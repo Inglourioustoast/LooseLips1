@@ -6,6 +6,26 @@
     android:layout_height="match_parent"
     android:background="@drawable/orangebackground">
 
+    <include layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        style="@style/AudioFileInfoOverlayText"
+        android:layout_width="332dp"
+        android:layout_height="131dp"
+        android:layout_marginTop="44dp"
+
+        android:fontFamily="@font/fredoka"
+        android:gravity="center"
+        android:outlineSpotShadowColor="#FFFFFF"
+        android:text="LooseLips"
+        android:textColor="#EDE4D6"
+        android:textSize="68sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewSubHeader"
@@ -18,26 +38,12 @@
         android:textColor="#cc7a00"
         android:textSize="32sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="332dp"
-        android:layout_height="131dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif"
-        android:gravity="center"
-        android:text="LooseLips"
-        android:textColor="#cc7a00"
-        android:textSize="64sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.468"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="wrap_content"
@@ -48,24 +54,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewSubHeader"/>
 
-    <fragment
-        android:id="@+id/fragment"
+    <com.google.android.material.circularreveal.CircularRevealFrameLayout
+        android:id="@+id/fragmentContainer"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#cc7a00"
+        android:layout_height="515dp"
+        android:layout_above="@id/bottomNav"
+        android:background="@null"
         app:defaultNavHost="true"
-        android:layout_above="@id/bottomNavigationView"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.921"
         app:navGraph="@navigation/my_nav" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+        android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#cc7a00"
+
+        android:background="@drawable/nav_background_curved"
         tools:layout_editor_absoluteX="197dp"
         tools:layout_editor_absoluteY="714dp"
         app:layout_constraintBottom_toBottomOf="parent"

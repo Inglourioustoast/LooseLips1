@@ -1,20 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content"
-    android:layout_width="match_parent"
+      android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/orangebackground"
-    tools:context=".MainActivity">
+    >
 
+    <include layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/textViewMOTD"
+        android:layout_width="319dp"
+        android:layout_height="328dp"
+        android:layout_marginTop="320dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:text="@string/unable_to_get_secret_message"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewReveal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="378dp"
+        android:layout_height="328dp"
+        android:layout_marginTop="180dp"
+        android:visibility="visible"
+
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.example.supersecretproject.ScratchCard
+            android:id="@+id/scratchCard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            app:cornerRadius="50dp"
+            tools:layout_conversion_absoluteHeight="298dp"
+            tools:layout_conversion_absoluteWidth="298dp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/signoutButton"
+        android:layout_width="337dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="44dp"
+        android:backgroundTint="@android:color/white"
+        android:text="Sign Out"
+        android:textColor="#FF9800"
+        android:textSize="24sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewTitle"
         style="@style/AudioFileInfoOverlayText"
         android:layout_width="332dp"
         android:layout_height="131dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="44dp"
 
         android:fontFamily="@font/fredoka"
         android:gravity="center"
@@ -24,65 +83,25 @@
         android:textSize="68sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/signoutButton"
-        android:layout_width="337dp"
-        android:layout_height="53dp"
-        android:layout_marginBottom="108dp"
-        android:backgroundTint="@android:color/white"
-        android:text="Sign Out"
-        android:textColor="#FF9800"
-        android:textSize="24sp"
-        app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewMOTD"
-        android:layout_width="307dp"
-        android:layout_height="182dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="308dp"
-        android:gravity="center"
-        android:text="unable to get secret Message"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.541"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.example.supersecretproject.ScratchCard
-        android:id="@+id/scratchCard"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-
-
-
-        app:cornerRadius="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewReveal"
-        android:layout_width="334dp"
-        android:layout_height="273dp"
-        android:layout_marginBottom="56dp"
-        android:background="#AF6901"
+        android:layout_width="393dp"
+        android:layout_height="90dp"
+        android:layout_marginBottom="36dp"
         android:gravity="center"
-        android:text="Tap To Reveal Secret Message"
+
+        android:text="Scratch to Reveal Secret Message"
+        android:textColor="@color/orange"
         android:textSize="32sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/signoutButton"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/cardView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_conversion_absoluteHeight="300dp"
+        tools:layout_conversion_absoluteWidth="300dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

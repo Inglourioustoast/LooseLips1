@@ -83,7 +83,7 @@ public class LogonAndAwaitValidation {
         }
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.editTextSubTitle), withText("Awating Validation"),
+                allOf(withId(R.id.editTextMOTD),
                         withParent(allOf(withId(R.id.content),
                                 withParent(withId(android.R.id.content)))),
                         isDisplayed()));

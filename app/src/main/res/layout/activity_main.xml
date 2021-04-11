@@ -9,6 +9,7 @@
     tools:context=".MainActivity">
 
 
+
     <Button
         android:id="@+id/loginButton"
         android:layout_width="337dp"
@@ -24,7 +25,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/logoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="168dp"
